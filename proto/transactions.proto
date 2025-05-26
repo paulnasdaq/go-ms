@@ -1,0 +1,26 @@
+syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+
+package transactions;
+option go_package = "./transactions";
+
+//enum TransactionType {
+//  DEBIT = 0;
+//  CREDIT = 1;
+//}
+message AddTransactionRequest{
+  string user_ID = 1;
+  string type = 2;
+  double amount = 3;
+}
+message AddTransactionResponse{
+  string ID = 1;
+  string user_ID = 2;
+  string type = 3;
+  double amount = 4;
+  google.protobuf.Timestamp created_at = 5;
+}
+
+service TransactionsService{
+  rpc AddTransaction(AddTransactionRequest) returns (AddTransactionResponse);
+}

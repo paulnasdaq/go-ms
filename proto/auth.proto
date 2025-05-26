@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package auth;
+option go_package = "./auth";
+
+message AddUserRequest {
+  string email = 1;
+  string password = 2;
+}
+
+message AddUserResponse {
+  string id = 1;
+  string email = 2;
+}
+
+
+message GetTokenRequest {
+  string email = 1;
+  string password = 2;
+}
+
+message GetTokenResponse {
+  string token = 1;
+}
+
+service Auth {
+  rpc AddUser (AddUserRequest) returns (AddUserResponse);
+  rpc GetToken(GetTokenRequest) returns (GetTokenResponse);
+}

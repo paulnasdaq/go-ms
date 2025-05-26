@@ -1,0 +1,59 @@
+syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+
+package vehicles;
+option go_package = "./vehicles";
+
+message VehicleServiceError {
+  uint32 code = 1;
+  string message = 2;
+}
+message AddVehicleModelRequest {
+  string name = 1;
+}
+
+message AddVehicleModelResponse {
+  string id = 1;
+  string name = 2;
+}
+
+message AddControllerRequest {
+
+}
+message AddControllerResponse {
+
+}
+
+message BindControllerToVehicleRequest{
+  string vehicle_id = 1;
+  string controller_id = 2;
+}
+
+message BindControllerToVehicleResponse{
+  string id = 1;
+  string vehicle_id = 2;
+  string controller_id = 3;
+  google.protobuf.Timestamp start_date = 4;
+  google.protobuf.Timestamp end_date = 5;
+}
+
+message AddVehicleRequest {
+  string model_id = 1;
+  string chassis_number = 2;
+  string registration_number = 3;
+}
+
+message AddVehicleResponse {
+  string id = 1;
+  string model_id = 2;
+  string chassis_number = 3;
+  string registration_number = 4;
+  VehicleServiceError error = 5;
+}
+
+service VehiclesService {
+  rpc AddVehicleModel (AddVehicleModelRequest) returns (AddVehicleModelResponse);
+  rpc AddVehicle(AddVehicleRequest) returns (AddVehicleResponse);
+  rpc AddController (AddControllerRequest) returns (AddControllerResponse);
+  rpc BindControllerToVehicle(BindControllerToVehicleRequest) returns (BindControllerToVehicleResponse);
+}
